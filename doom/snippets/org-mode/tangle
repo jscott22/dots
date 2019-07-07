@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: org-tangle
+# key: <st
+# --
+#+begin_src elisp :tangle yes
+$1
+#+end_src

@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: Doom Cast - SPC DEL
+# key: dcspde
+# condition: t
+# --
+DEL - Blink cursor line
+*** Signature
+[[help:+nav-flash-blink-cursor][(+nav-flash/blink-cursor)]]
+
+*** Documentation
+Blink current line using ~nav-flash~.

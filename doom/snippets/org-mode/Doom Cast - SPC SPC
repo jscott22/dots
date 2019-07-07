@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: Doom Cast - SPC SPC
+# key: dcspcspc
+# --
+SPC - Find file in project
+*** Signature
+[[help:+ivy/projectile-find-file][(+ivy/projectile-find-file)]]
+
+*** Documentation
+A more sensible [[help:counsel-projectile-find-file][(counsel-projectile-find-file)]], which will revert to
+[[help:counsel-find-file][(counsel-find-file)]] if invoked from $HOME, [[help:counsel-file-jump][(counsel-file-jump)]] if invoked from a
+non-project, [[help:projectile-find-file][(projectile-find-file)]] if in a big project (more than
+[[help:ivy-sort-max-size][ivy-sort-max-size]] files), or [[help:counsel-projectile-find-file][(counsel-projectile-find-file)]] therwise.
+
+The point of this is to avoid Emacs locking up indexing massive file trees.
