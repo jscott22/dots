@@ -1,39 +1,51 @@
-;;; doom-one-theme.el --- inspired by Atom One Dark
+;;; doom-ewal-theme.el --- inspired by Atom One Dark
 (require 'doom-themes)
-
-;;
-(defgroup lake-theme nil
+(require 'ewal)
+(ewal-load-ewal-colors)
+(defgroup doom-ewal-theme nil
   "Options for doom-themes"
   :group 'doom-themes)
 
-(defcustom lake-brighter-modeline nil
+(defcustom doom-ewal-brighter-modeline nil
   "If non-nil, more vivid colors will be used to style the mode-line."
-  :group 'lake-theme
+  :group 'doom-ewal-theme
   :type 'boolean)
 
-(defcustom lake-brighter-comments nil
+(defcustom doom-ewal-brighter-comments nil
   "If non-nil, comments will be highlighted in more vivid colors."
-  :group 'lake-theme
+  :group 'doom-ewal-theme
   :type 'boolean)
 
-(defcustom lake-bg lake-brighter-comments
+(defcustom doom-ewal-comment-bg doom-ewal-brighter-comments
   "If non-nil, comments will have a subtle, darker background. Enhancing their
 legibility."
-  :group 'lake-theme
+  :group 'doom-ewal-theme
   :type 'boolean)
 
-(defcustom lake-padded-modeline doom-themes-padded-modeline
+(defcustom doom-ewal-padded-modeline doom-themes-padded-modeline
   "If non-nil, adds a 4px padding to the mode-line. Can be an integer to
 determine the exact padding."
-  :group 'lake-theme
+  :group 'doom-ewal-theme
   :type '(or integer boolean))
 
+;; ((comment "#444f56" "#4a555d" "#4f5c64" "#55636c" "#5b6973" "#60707a" "#667681" "#6c7d88" "#728490" "#798a95" "#80909b" "#8796a0" "#8e9ca6" "#95a2ab" "#9ca8b1" "#a3afb6" "#aab5bc")
+;;  (background "#020106" "#020107" "#020107" "#030108" "#030108" "#030109" "#030109" "#03010a" "#04020B" "#100e17" "#1d1b23" "#29272f" "#36343b" "#424148" "#4f4d54" "#5b5a60" "#68676c")
+;;  (foreground "#62717c" "#6a7a86" "#728490" "#7b8d9b" "#8397a5" "#8ba0af" "#93aaba" "#9bb3c4" "#a4bdcf" "#a8c0d1" "#adc3d3" "#b1c6d6" "#b6cad8" "#bacddb" "#bfd0dd" "#c3d4df" "#c8d7e2")
+;;  (cursor "#62717c" "#6a7a86" "#728490" "#7b8d9b" "#8397a5" "#8ba0af" "#93aaba" "#9bb3c4" "#a4bdcf" "#a8c0d1" "#adc3d3" "#b1c6d6" "#b6cad8" "#bacddb" "#bfd0dd" "#c3d4df" "#c8d7e2")
+;;  (black "#020106" "#020107" "#020107" "#030108" "#030108" "#030109" "#030109" "#03010a" "#04020B" "#100e17" "#1d1b23" "#29272f" "#36343b" "#424148" "#4f4d54" "#5b5a60" "#68676c")
+;;  (red "#1b1f3e" "#1d2243" "#202548" "#22274e" "#242a53" "#272d58" "#292f5d" "#2b3262" "#2E3568" "#383f6f" "#424977" "#4d537e" "#575d86" "#62678d" "#6c7195" "#777b9c" "#8185a4")
+;;  (green "#2a1f3f" "#2e2144" "#31244a" "#35274f" "#382954" "#3c2c5a" "#3f2e5f" "#433164" "#47346A" "#503e71" "#594878" "#625280" "#6b5c87" "#75668f" "#7e7096" "#877b9e" "#9085a5")
+;;  (yellow "#561e49" "#5d204f" "#642255" "#6c255b" "#732861" "#7a2a67" "#812d6d" "#882f73" "#90327A" "#953c80" "#9b4687" "#a0508d" "#a65a94" "#ab659b" "#b16fa1" "#b679a8" "#bc84af")
+;;  (blue "#212f51" "#243357" "#27375e" "#2a3b65" "#2c3f6c" "#2f4372" "#324779" "#354b80" "#384F87" "#41578d" "#4b6093" "#556999" "#5f729f" "#697ba5" "#7383ab" "#7d8cb1" "#8795b7")
+;;  (magenta "#2e3e5a" "#324362" "#364869" "#3a4e71" "#3e5378" "#425880" "#465d87" "#4a628f" "#4E6897" "#566f9c" "#5f77a1" "#687ea6" "#7186ab" "#7a8db1" "#8395b6" "#8b9cbb" "#94a4c0")
+;;  (cyan "#74186d" "#7e1a76" "#871b7f" "#911e88" "#9b2091" "#a4229a" "#ae24a3" "#b826ac" "#C228B6" "#c532b9" "#c83dbd" "#cb48c0" "#ce52c4" "#d15dc8" "#d468cb" "#d773cf" "#da7ed3")
+;;  (white "#62717c" "#6a7a86" "#728490" "#7b8d9b" "#8397a5" "#8ba0af" "#93aaba" "#9bb3c4" "#a4bdcf" "#a8c0d1" "#adc3d3" "#b1c6d6" "#b6cad8" "#bacddb" "#bfd0dd" "#c3d4df" "#c8d7e2"))
 ;;
-(def-doom-theme lake
+(def-doom-theme doom-ewal
   "A dark theme inspired by Atom One Dark"
 
   ;; name        default   256       16
-  ((bg         '("#282c34" nil       nil            ))
+  ((bg         '((string (ewal-get-color 'background 0)) nil       nil            ))
    (bg-alt     '("#21242b" nil       nil            ))
    (base0      '("#1B2229" "black"   "black"        ))
    (base1      '("#1c1f24" "#1e1e1e" "brightblack"  ))
@@ -65,8 +77,8 @@ determine the exact padding."
    (vertical-bar   (doom-darken base1 0.1))
    (selection      dark-blue)
    (builtin        magenta)
-   (comments       (if doom-one-brighter-comments dark-cyan base5))
-   (doc-comments   (doom-lighten (if doom-one-brighter-comments dark-cyan base5) 0.25))
+   (comments       (if doom-ewal-brighter-comments dark-cyan base5))
+   (doc-comments   (doom-lighten (if doom-ewal-brighter-comments dark-cyan base5) 0.25))
    (constants      violet)
    (functions      magenta)
    (keywords       blue)
@@ -86,10 +98,10 @@ determine the exact padding."
 
    ;; custom categories
    (hidden     `(,(car bg) "black" "black"))
-   (-modeline-bright doom-one-brighter-modeline)
+   (-modeline-bright doom-ewal-brighter-modeline)
    (-modeline-pad
-    (when doom-one-padded-modeline
-      (if (integerp doom-one-padded-modeline) doom-one-padded-modeline 4)))
+    (when doom-ewal-padded-modeline
+      (if (integerp doom-ewal-padded-modeline) doom-ewal-padded-modeline 4)))
 
    (modeline-fg     nil)
    (modeline-fg-alt base5)
@@ -116,7 +128,7 @@ determine the exact padding."
 
    (font-lock-comment-face
     :foreground comments
-    :background (if doom-one-comment-bg (doom-lighten bg 0.05)))
+    :background (if doom-ewal-comment-bg (doom-lighten bg 0.05)))
    (font-lock-doc-face
     :inherit 'font-lock-comment-face
     :foreground doc-comments)
@@ -168,6 +180,4 @@ determine the exact padding."
   ;; ()
   )
 
-
-(provide-theme 'lake-theme)
-;;; doom-one-theme.el ends here
+;;; Doom-ewal-theme.el ends here

@@ -27,3 +27,4 @@
 (package! writeroom-mode)
 
 (package! jinja2-mode)
+(package! ewal)

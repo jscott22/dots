@@ -1,0 +1,3 @@
+[submodule ".doom.d/themes/doom-theme-generator"]
+	path = .doom.d/themes/doom-theme-generator
+	url = git@gitlab.com:valtrok/doom-theme-generator.git

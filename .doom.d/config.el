@@ -1,5 +1,96 @@
-(after! notmuch
-  (setq notmuch-multipart/alternative-discouraged '("text/plain" "multipart/related")))
+(setq doom-font (font-spec :family "Hack" :size 16))
+(setq doom-theme 'doom-foo)
+(doom/reload-font)
+
+(add-to-list 'default-frame-alist '(fullscreen . maximized))
+
+(def-package! ewal
+  :init (ewal-load-ewal-colors))
+
+(def-package! lsp-mode
+  :init (add-to-list 'exec-path "/home/blaeni/elixir-ls/release")
+  :config
+  (setq lsp-enable-eldoc t
+        lsp-enable-completion-at-point t))
+
+(def-package! company-lsp
+  :config
+  (setq company-lsp-async t
+        company-lsp-enable-snippet t))
+
+(after! company
+  (setq company-idle-delay 0.2
+        company-minimum-prefix-length 1))
+
+(add-hook 'elixir-mode-hook
+          (lambda ()
+            (set-company-backend! 'elixir-mode '(company-lsp company-yasnippet))))
+
+(add-hook 'elixir-mode-hook
+          (lambda ()
+            (lsp)
+            (flycheck-add-next-checker 'lsp-ui 'elixir-credo)))
+
+;; (add-hook 'elixir-mode-hook
+;;           (lambda ()
+;;             (add-hook 'before-save-hook 'elixir-format nil t)))
+
+(def-package! org
+  :init
+  (setq org-directory "~/Dropbox/Documents/Org"
+        org-agenda-files (list org-directory)))
+
+(after! org
+  (setq org-capture-templates
+        '(("t" "Task" entry
+           (file+headline "inbox.org" "Tasks")
+           "** TODO %? %^G \n %U" )
+          ("h" "Home")
+          ("ht" "Home - Task" entry
+           (file+headline "personal.org" "Tasks")
+           "** TODO %? %^G \n %U" ))))
+
+(after! counsel
+  (map!
+   [remap org-capture]              #'org-capture))
+
+(after! org
+  (setq org-log-reschedule 'note)
+  (setq org-log-done 'time))
+
+(after! org
+  (setq org-default-notes-file (concat org-directory "/inbox.org")))
+
+(after! org
+  (setq org-refile-targets '((nil :maxlevel . 9)
+                             (org-agenda-files :maxlevel . 9))
+        org-refile-use-outline-path t
+        org-outline-path-complete-in-steps nil))
+
+(after! org
+  (setq org-todo-keywords
+      '((sequence "TODO(t!)" "NEXT(n!)" "WAITING(w@/!)" "MAYBE(m@)" "PROJ(p)" "|" "DONE(d!)" "CANCELED(c@/!)" ))))
+
+;foo
+(def-package! hl-todo
+  :hook (prog-mode . hl-todo-mode)
+  :config
+  (setq hl-todo-keyword-faces
+        `(("TODO"  . ,(face-foreground 'warning))
+          ("NEXT"  . ,(face-foreground 'warning))
+          ("WAITING" . ,(face-foreground 'warning))
+          ("MAYBE" . ,(face-foreground 'warning))
+          ("PROJ" . ,(face-foreground 'warning))
+          ("NOTE"  . ,(face-foreground 'success)))))
+
+(defun org-update-cookies-after-save()
+  (interactive)
+  (let ((current-prefix-arg '(4)))
+    (org-update-statistics-cookies "ALL")))
+
+(add-hook 'org-mode-hook
+          (lambda ()
+            (add-hook 'before-save-hook 'org-update-cookies-after-save nil 'make-it-local)))
 
 ;(setq notmuch-message-deleted-tags '("+trash" "+deleted" "-inbox" "-unread"))
 (setq notmuch-search-oldest-first nil)

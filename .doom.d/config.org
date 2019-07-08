@@ -5,12 +5,17 @@
 ** Font
 #+begin_src emacs-lisp :tangle yes
 (setq doom-font (font-spec :family "Hack" :size 16))
-(setq doom-theme 'doom-mountain)
+(setq doom-theme 'doom-foo)
 (doom/reload-font)
 #+end_src
 ** Fullscreen
 #+begin_src emacs-lisp :tangle yes
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
+#+end_src
+** Ewal
+#+begin_src emacs-lisp :tangle yes
+(def-package! ewal
+  :init (ewal-load-ewal-colors))
 #+end_src
 * LSP
 ** lsp-mode
