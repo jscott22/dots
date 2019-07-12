@@ -17,8 +17,11 @@ local hotkeys_popup = require("awful.hotkeys_popup")
 -- Enable hotkeys help widget for VIM and other apps
 -- when client with a matching name is opened:
 require("awful.hotkeys_popup.keys")
-
--- {{{ Error handling
+-- Awesome Widgets
+local spotify_widget = require("awesome-wm-widgets.spotify-widget.spotify")
+local volume_widget = require("awesome-wm-widgets.volumearc-widget.volumearc")
+local batteryarc_widget = require("awesome-wm-widgets.batteryarc-widget.batteryarc")-- {{{ Error handling
+local brightness_widget = require("awesome-wm-widgets.brightness-widget.brightness")
 -- Check if awesome encountered an error during startup and fell back to
 -- another config (This code will only ever execute for the fallback config)
 if awesome.startup_errors then
@@ -196,7 +199,8 @@ awful.screen.connect_for_each_screen(function(s)
 
     -- Create the wibox
     s.mywibox = awful.wibar({ position = "top", screen = s })
-
+    sprtr = wibox.widget.textbox()
+    sprtr:set_text(" : ")
     -- Add widgets to the wibox
     s.mywibox:setup {
         layout = wibox.layout.align.horizontal,
@@ -209,7 +213,15 @@ awful.screen.connect_for_each_screen(function(s)
         s.mytasklist, -- Middle widget
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
-            mykeyboardlayout,
+            spotify_widget,
+            sprtr,
+            volume_widget,
+            sprtr,
+            brightness_widget,
+            sprtr,
+            batteryarc_widget,
+            sprtr,
+            -- mykeyboardlayout,
             wibox.widget.systray(),
             mytextclock,
             s.mylayoutbox,
@@ -568,7 +580,7 @@ client.connect_signal("focus", function(c) c.border_color = beautiful.border_foc
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 -- }}}
 
-os.execute("~/.screenlayout/home3.sh")
-os.execute("express-connect")
+awful.spawn.with_shell("~/.screenlayout/home3.sh")
+awful.spawn.with_shell("express-connect")
 awful.spawn.with_shell("launch-compton")
 
