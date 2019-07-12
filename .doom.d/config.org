@@ -4,10 +4,11 @@
 * UI
 ** Font
 #+begin_src emacs-lisp :tangle yes
-(setq doom-font (font-spec :family "Hack" :size 16))
-(setq doom-theme 'doom-foo)
+(setq doom-font (font-spec :family "UbuntuMono NF" :size 18))
+(setq doom-theme 'doom-wal)
 (doom/reload-font)
 #+end_src
+
 ** Fullscreen
 #+begin_src emacs-lisp :tangle yes
 (add-to-list 'default-frame-alist '(fullscreen . maximized))

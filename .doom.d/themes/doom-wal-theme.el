@@ -1,0 +1,1 @@
+/home/blaeni/doom-theme-generator/doom-wal-theme.el
