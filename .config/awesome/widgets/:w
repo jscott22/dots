@@ -1,0 +1,46 @@
+local awful = require("awful")
+local wibox = require("wibox")
+
+
+local GET_EXPRESS_STATUS = 'expressvpn status'
+local PATH_TO_ICONS = '/usr/share/icons/Arc'
+
+local express_widget = wibox.widget {
+    -- {
+    --     id = "icon",
+    --     widget = wibox.widget.imagebox,
+    -- },
+    {
+        id = "status",
+        align = 'center',
+        valign = 'center',
+        widget = wibox.widget.textbox,
+    },
+    layout = wibox.layout.align.horizontal,
+    set_status = function(self, connected)
+        if connected then
+            self.icon.image = PATH_TO_ICONS .. "/devices/24/network-vpn.png"
+        else
+            self.icon.image = PATH_TO_ICONS .. "/status/24/dialog-warning.png"
+        end
+    end,
+    set_text = function(self, status)
+        self.status.markup = status
+    end,
+}
+
+local update_widget = function(widget, stdout, _, _, _)
+    connected = string.find(stdout, 'Connected') ~= nil
+
+    widget:set_status(connected)
+
+    if connected then
+        widget:set_text('Connected')
+    else
+        widget:set_text('Disconnected')
+    end
+end
+
+awful.widget.watch(GET_EXPRESS_STATUS, 1, update_widget, express_widget)
+
+return express_widget

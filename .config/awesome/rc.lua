@@ -22,6 +22,9 @@ local spotify_widget = require("awesome-wm-widgets.spotify-widget.spotify")
 local volume_widget = require("awesome-wm-widgets.volumearc-widget.volumearc")
 local batteryarc_widget = require("awesome-wm-widgets.batteryarc-widget.batteryarc")-- {{{ Error handling
 local brightness_widget = require("awesome-wm-widgets.brightness-widget.brightness")
+-- Custom Widgets
+local express_widget = require("widgets.express-vpn")
+
 -- Check if awesome encountered an error during startup and fell back to
 -- another config (This code will only ever execute for the fallback config)
 if awesome.startup_errors then
@@ -51,7 +54,7 @@ end
 beautiful.init("/home/blaeni/.config/awesome/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
-terminal = "kitty"
+terminal = "alacritty"
 editor = os.getenv("EDITOR") or "emacs"
 editor_cmd = terminal .. " -e " .. editor
 
@@ -217,12 +220,15 @@ awful.screen.connect_for_each_screen(function(s)
             sprtr,
             volume_widget,
             sprtr,
+            express_widget,
+            sprtr,
             brightness_widget,
             sprtr,
             batteryarc_widget,
             sprtr,
             -- mykeyboardlayout,
             wibox.widget.systray(),
+            sprtr,
             mytextclock,
             s.mylayoutbox,
         },
@@ -275,14 +281,16 @@ globalkeys = gears.table.join(
               {description = "focus the previous screen", group = "screen"}),
     awful.key({ modkey,           }, "u", awful.client.urgent.jumpto,
               {description = "jump to urgent client", group = "client"}),
-    awful.key({ modkey,           }, "Tab",
-        function ()
-            awful.client.focus.history.previous()
-            if client.focus then
-                client.focus:raise()
-            end
-        end,
-        {description = "go back", group = "client"}),
+    awful.key({ modkey },            "Tab",     function () os.execute("rofi -show window") end,
+              {description = "rofi window", group = "client"}),
+    -- awful.key({ modkey,           }, "Tab",
+    --     function ()
+    --         awful.client.focus.history.previous()
+    --         if client.focus then
+    --             client.focus:raise()
+    --         end
+    --     end,
+    --     {description = "go back", group = "client"}),
 
     -- Standard program
     awful.key({ modkey,           }, "Return", function () awful.spawn(terminal) end,
