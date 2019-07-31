@@ -10,6 +10,8 @@ require("awful.autofocus")
 local wibox = require("wibox")
 -- Theme handling library
 local beautiful = require("beautiful")
+-- Themes define colours, icons, font and wallpapers.
+beautiful.init("/home/blaeni/.config/awesome/theme.lua")
 -- Notification library
 local naughty = require("naughty")
 local menubar = require("menubar")
@@ -22,8 +24,11 @@ local spotify_widget = require("awesome-wm-widgets.spotify-widget.spotify")
 local volume_widget = require("awesome-wm-widgets.volumearc-widget.volumearc")
 local batteryarc_widget = require("awesome-wm-widgets.batteryarc-widget.batteryarc")-- {{{ Error handling
 local brightness_widget = require("awesome-wm-widgets.brightness-widget.brightness")
+
 -- Custom Widgets
 local express_widget = require("widgets.express-vpn")
+
+local helpers = require("helpers")
 
 -- Check if awesome encountered an error during startup and fell back to
 -- another config (This code will only ever execute for the fallback config)
@@ -50,8 +55,6 @@ end
 -- }}}
 
 -- {{{ Variable definitions
--- Themes define colours, icons, font and wallpapers.
-beautiful.init("/home/blaeni/.config/awesome/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
 terminal = "alacritty"
@@ -170,6 +173,9 @@ end
 screen.connect_signal("property::geometry", set_wallpaper)
 
 awful.screen.connect_for_each_screen(function(s)
+    -- Noodle Widgets
+    local text_taglist_widget = require("noodle.text_taglist")
+
     -- Wallpaper
     set_wallpaper(s)
 
@@ -193,6 +199,10 @@ awful.screen.connect_for_each_screen(function(s)
         buttons = taglist_buttons
     }
 
+    s.text_taglist = text_taglist_widget
+
+    -- s.text_taglist = text_taglist_widget(s)
+
     -- Create a tasklist widget
     s.mytasklist = awful.widget.tasklist {
         screen  = s,
@@ -203,17 +213,19 @@ awful.screen.connect_for_each_screen(function(s)
     -- Create the wibox
     s.mywibox = awful.wibar({ position = "top", screen = s })
     sprtr = wibox.widget.textbox()
-    sprtr:set_text(" : ")
+    sprtr:set_text("  ")
     -- Add widgets to the wibox
     s.mywibox:setup {
         layout = wibox.layout.align.horizontal,
         { -- Left widgets
             layout = wibox.layout.fixed.horizontal,
-            mylauncher,
+            --mylauncher,
             s.mytaglist,
+            s.text_taglist(s),
             -- s.mypromptbox,
         },
-        s.mytasklist, -- Middle widget
+        sprtr,
+        -- s.mytasklist, -- Middle widget
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
             spotify_widget,
@@ -587,6 +599,28 @@ end)
 client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 -- }}}
+
+-- Rounded corners
+if beautiful.border_radius ~= 0 then
+    client.connect_signal("manage", function (c, startup)
+        if not c.fullscreen then
+            c.shape = helpers.rrect(beautiful.border_radius)
+        end
+    end)
+
+    -- Fullscreen & maximised clients should not have rounded corners
+    local function no_round_corners (c)
+        if c.fullscreen or c.maximized then
+            c.shape = helpers.rect()
+        else
+            c.shape = helpers.rrect(beautiful.border_radius)
+        end
+    end
+
+    client.connect_signal("property::fullscreen", no_round_corners)
+    client.connect_signal("property::maximized", no_round_corners)
+end
+
 
 awful.spawn.with_shell("~/.screenlayout/home3.sh")
 awful.spawn.with_shell("express-connect")

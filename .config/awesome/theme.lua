@@ -27,7 +27,7 @@ theme.fg_focus      = theme.bg_normal
 theme.fg_urgent     = theme.bg_normal
 theme.fg_minimize   = theme.bg_normal
 
-theme.useless_gap   = dpi(5)
+theme.useless_gap   = dpi(12)
 theme.border_width  = dpi(4)
 theme.border_normal = xrdb.color0
 theme.border_focus  = theme.bg_focus
@@ -92,6 +92,18 @@ theme = theme_assets.recolor_titlebar(
 theme = theme_assets.recolor_titlebar(
     theme, xrdb.color1, "focus", "press"
 )
+
+-- Noodle Text Taglist
+theme.taglist_text_font = "UbuntuMono NF 11"
+theme.taglist_text_empty    = {"","","","","","","","","",""}
+theme.taglist_text_occupied = {"","","","","","","","","",""}
+theme.taglist_text_focused  = {"","","","","","","","","",""}
+theme.taglist_text_urgent   = {"","","","","","","","","",""}
+
+theme.taglist_text_color_empty    =  xrdb.color8
+theme.taglist_text_color_occupied  =  xrdb.color1
+theme.taglist_text_color_focused  =  xrdb.color1
+theme.taglist_text_color_urgent   =  xrdb.color9
 
 -- Define the icon theme for application icons. If not set then the icons
 -- from /usr/share/icons and /usr/share/icons/hicolor will be used.
