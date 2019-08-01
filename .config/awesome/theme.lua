@@ -17,9 +17,9 @@ local theme = dofile(themes_path.."default/theme.lua")
 theme.font          = "UbuntuMono NF 10"
 
 theme.bg_normal     = xrdb.background
-theme.bg_focus      = xrdb.color12
-theme.bg_urgent     = xrdb.color9
-theme.bg_minimize   = xrdb.color8
+theme.bg_focus      = xrdb.color1
+theme.bg_urgent     = xrdb.color3
+theme.bg_minimize   = xrdb.color4
 theme.bg_systray    = theme.bg_normal
 
 theme.fg_normal     = xrdb.foreground
@@ -28,7 +28,7 @@ theme.fg_urgent     = theme.bg_normal
 theme.fg_minimize   = theme.bg_normal
 
 theme.useless_gap   = dpi(12)
-theme.border_width  = dpi(4)
+theme.border_width  = dpi(3)
 theme.border_normal = xrdb.color0
 theme.border_focus  = theme.bg_focus
 theme.border_marked = xrdb.color10
@@ -94,15 +94,15 @@ theme = theme_assets.recolor_titlebar(
 )
 
 -- Noodle Text Taglist
-theme.taglist_text_font = "UbuntuMono NF 11"
+theme.taglist_text_font = "UbuntuMono NF 14"
 theme.taglist_text_empty    = {"","","","","","","","","",""}
-theme.taglist_text_occupied = {"","","","","","","","","",""}
-theme.taglist_text_focused  = {"","","","","","","","","",""}
-theme.taglist_text_urgent   = {"","","","","","","","","",""}
+theme.taglist_text_occupied = {"","","","","","","","","",""}
+theme.taglist_text_focused  = {"","","","","","","","","",""}
+theme.taglist_text_urgent   = {"","","","","","","","","",""}
 
 theme.taglist_text_color_empty    =  xrdb.color8
-theme.taglist_text_color_occupied  =  xrdb.color1
-theme.taglist_text_color_focused  =  xrdb.color1
+theme.taglist_text_color_occupied  =  theme.bg_minimize
+theme.taglist_text_color_focused  =  theme.bg_focus
 theme.taglist_text_color_urgent   =  xrdb.color9
 
 -- Define the icon theme for application icons. If not set then the icons

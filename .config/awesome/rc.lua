@@ -21,8 +21,8 @@ local hotkeys_popup = require("awful.hotkeys_popup")
 require("awful.hotkeys_popup.keys")
 -- Awesome Widgets
 local spotify_widget = require("awesome-wm-widgets.spotify-widget.spotify")
-local volume_widget = require("awesome-wm-widgets.volumearc-widget.volumearc")
-local batteryarc_widget = require("awesome-wm-widgets.batteryarc-widget.batteryarc")-- {{{ Error handling
+local volume_widget = require("awesome-wm-widgets.volume-widget.volume")
+local battery_widget = require("awesome-wm-widgets.battery-widget.battery")-- {{{ Error handling
 local brightness_widget = require("awesome-wm-widgets.brightness-widget.brightness")
 
 -- Custom Widgets
@@ -217,14 +217,18 @@ awful.screen.connect_for_each_screen(function(s)
     -- Add widgets to the wibox
     s.mywibox:setup {
         layout = wibox.layout.align.horizontal,
+        expand = "none",
         { -- Left widgets
-            layout = wibox.layout.fixed.horizontal,
-            --mylauncher,
+            s.mylayoutbox,
             --s.mytaglist,
-            s.text_taglist(s),
             -- s.mypromptbox,
+            layout = wibox.layout.fixed.horizontal,
         },
-        sprtr,
+        {
+            s.text_taglist(s),
+            max_widget_size = 1500,
+            layout = wibox.layout.flex.horizontal,
+        },
         -- s.mytasklist, -- Middle widget
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
@@ -234,15 +238,14 @@ awful.screen.connect_for_each_screen(function(s)
             sprtr,
             express_widget,
             sprtr,
-            brightness_widget,
-            sprtr,
-            batteryarc_widget,
+            -- brightness_widget,
+            -- sprtr,
+            battery_widget,
             sprtr,
             -- mykeyboardlayout,
             wibox.widget.systray(),
             sprtr,
             mytextclock,
-            s.mylayoutbox,
         },
     }
 end)
