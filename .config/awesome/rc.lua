@@ -25,6 +25,12 @@ local volume_widget = require("awesome-wm-widgets.volume-widget.volume")
 local battery_widget = require("awesome-wm-widgets.battery-widget.battery")-- {{{ Error handling
 local brightness_widget = require("awesome-wm-widgets.brightness-widget.brightness")
 
+-- Noodle Widgets
+local text_taglist_widget = require("noodle.text_taglist")
+
+-- Lain Widgets
+local lain = require("lain")
+
 -- Custom Widgets
 local express_widget = require("widgets.express-vpn")
 
@@ -173,9 +179,6 @@ end
 screen.connect_signal("property::geometry", set_wallpaper)
 
 awful.screen.connect_for_each_screen(function(s)
-    -- Noodle Widgets
-    local text_taglist_widget = require("noodle.text_taglist")
-
     -- Wallpaper
     set_wallpaper(s)
 
@@ -193,13 +196,13 @@ awful.screen.connect_for_each_screen(function(s)
                            awful.button({ }, 4, function () awful.layout.inc( 1) end),
                            awful.button({ }, 5, function () awful.layout.inc(-1) end)))
     -- Create a taglist widget
-    s.mytaglist = awful.widget.taglist {
-        screen  = s,
-        filter  = awful.widget.taglist.filter.all,
-        buttons = taglist_buttons
-    }
+    -- s.mytaglist = awful.widget.taglist {
+    --     screen  = s,
+    --     filter  = awful.widget.taglist.filter.all,
+    --     buttons = taglist_buttons
+    -- }
 
-    s.text_taglist = text_taglist_widget
+    s.text_taglist = text_taglist_widget(s)
 
     -- s.text_taglist = text_taglist_widget(s)
 
@@ -225,7 +228,7 @@ awful.screen.connect_for_each_screen(function(s)
             layout = wibox.layout.fixed.horizontal,
         },
         {
-            s.text_taglist(s),
+            s.text_taglist,
             max_widget_size = 1500,
             layout = wibox.layout.flex.horizontal,
         },
@@ -544,7 +547,7 @@ awful.rules.rules = {
 client.connect_signal("manage", function (c)
     -- Set the windows at the slave,
     -- i.e. put it at the end of others instead of setting it master.
-    -- if not awesome.startup then awful.client.setslave(c) end
+    if not awesome.startup then awful.client.setslave(c) end
 
     if awesome.startup
       and not c.size_hints.user_position

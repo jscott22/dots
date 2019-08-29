@@ -11,7 +11,7 @@
 
 ** Fullscreen
 #+begin_src emacs-lisp :tangle yes
-(add-to-list 'default-frame-alist '(fullscreen . maximized))
+;; (add-to-list 'default-frame-alist '(fullscreen . maximized))
 #+end_src
 ** Ewal
 #+begin_src emacs-lisp :tangle yes
@@ -23,6 +23,8 @@
 #+begin_src emacs-lisp :tangle yes
 (def-package! lsp-mode
   :init (add-to-list 'exec-path "/home/blaeni/elixir-ls/release")
+  :hook
+  (elixir-mode . lsp)
   :config
   (setq lsp-enable-eldoc t
         lsp-enable-completion-at-point t))
@@ -45,6 +47,7 @@
 #+begin_src emacs-lisp :tangle yes
 (add-hook 'elixir-mode-hook
           (lambda ()
+            (lsp)
             (set-company-backend! 'elixir-mode '(company-lsp company-yasnippet))))
 #+end_src
 ** flycheck-credo
@@ -312,4 +315,21 @@
    :map notmuch-tree-mode-map
    :nv "d" #'+notmuch/tree-delete)
   )
+#+end_src
+* nand2tetris
+#+begin_src emacs-lisp :tangle yes
+(def-package! nand2tetris
+  :config
+  (setq nan2tetris-core-base-dir "~/nand2tetris"
+        nand2tetris-hardware-simulator "~/nand2tetris/tools/HardwareSimulator.sh"))
+#+end_src
+
+#+RESULTS:
+: t
+
+* evil terminal
+#+begin_src emacs-lisp :tangle yes
+(def-package! evil
+  :init
+  (setq evil-want-C-i-jump nil))
 #+end_src
