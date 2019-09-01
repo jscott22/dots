@@ -1,6 +1,6 @@
 #alias ssh="kitty +kitten ssh"
 #export PATH=$HOME/.fpath/bin:$PATH:$HOME/.emacs.d/bin:$PATH:$HOME/elixir-ls/release
-export PATH=$HOME/.fpath/bin:$PATH:$HOME/.emacs.d/bin
+export PATH=$HOME/.local/bin:$PATH:$HOME/.emacs.d/bin
 export PATH=$PATH:/home/blaeni/.asdf/installs/nodejs/10.16.0/.npm/bin
 export ANDROID_HOME=$HOME/Android/Sdk
 export PATH=$PATH:$ANDROID_HOME/emulator

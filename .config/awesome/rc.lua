@@ -11,7 +11,7 @@ local wibox = require("wibox")
 -- Theme handling library
 local beautiful = require("beautiful")
 -- Themes define colours, icons, font and wallpapers.
-beautiful.init("/home/blaeni/.config/awesome/theme.lua")
+beautiful.init("/home/tyrell/.config/awesome/theme.lua")
 -- Notification library
 local naughty = require("naughty")
 local menubar = require("menubar")

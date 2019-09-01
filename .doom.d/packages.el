@@ -28,4 +28,3 @@
 
 (package! jinja2-mode)
 (package! ewal)
-(package! nand2tetris)

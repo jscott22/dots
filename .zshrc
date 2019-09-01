@@ -20,7 +20,7 @@ source ~/.cache/wal/colors-tty.sh
 #export PATH=$PATH:$HOME/.emacs.d/bin:$HOME/.fpath/bin
 # Path to your oh-my-zsh installation.
 export TERMINAL="/usr/bin/kitty"
-export ZSH="/home/blaeni/.oh-my-zsh"
+export ZSH="/home/tyrell/.oh-my-zsh"
 export SUDO_EDITOR="vim"
 export TAXI_ENV="dev"
 
@@ -122,7 +122,7 @@ source $ZSH/oh-my-zsh.sh
 . $HOME/.asdf/completions/asdf.bash
 
 # The next line updates PATH for the Google Cloud SDK.
-if [ -f '/home/blaeni/google-cloud-sdk/path.zsh.inc' ]; then . '/home/blaeni/google-cloud-sdk/path.zsh.inc'; fi
+if [ -f '/home/tyrell/google-cloud-sdk/path.zsh.inc' ]; then . '/home/tyrell/google-cloud-sdk/path.zsh.inc'; fi
 
 # The next line enables shell command completion for gcloud.
-if [ -f '/home/blaeni/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/blaeni/google-cloud-sdk/completion.zsh.inc'; fi
+if [ -f '/home/tyrell/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/tyrell/google-cloud-sdk/completion.zsh.inc'; fi

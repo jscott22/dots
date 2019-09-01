@@ -145,7 +145,7 @@ end
 --     return content:sub(1, -2)
 -- end
 
-theme.wallpaper = "/home/blaeni/wallpapers/hello.jpeg"
+theme.wallpaper = "/home/tyrell/.config/awesome/wallpaper.jpeg"
 return theme
 
 -- vim: filetype=lua:expandtab:shiftwidth=4:tabstop=8:softtabstop=4:textwidth=80
