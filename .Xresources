@@ -67,3 +67,12 @@ XClock*secondColor: rgba:c7/c3/c7/ff
 ! Set depth to make transparency work.
 URxvt*depth: 32
 
+!font settings
+xscreensaver.Dialog.headingFont:        -*-roboto-bold-r-*-*-28-*-*-*-*-*-*-*
+xscreensaver.Dialog.bodyFont:           -*-roboto-medium-r-*-*-20-*-*-*-*-*-*-*
+xscreensaver.Dialog.labelFont:          -*-roboto-medium-r-*-*-20-*-*-*-*-*-*-*
+xscreensaver.Dialog.unameFont:          -*-roboto-medium-r-*-*-26-*-*-*-*-*-*-*
+xscreensaver.Dialog.buttonFont:         -*-roboto-bold-r-*-*-20-*-*-*-*-*-*-*
+xscreensaver.Dialog.dateFont:           -*-roboto-medium-r-*-*-16-*-*-*-*-*-*-*
+xscreensaver.passwd.passwdFont:         -*-roboto-bold-r-*-*-20-*-*-*-*-*-*-*
+

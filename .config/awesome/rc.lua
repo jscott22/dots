@@ -264,6 +264,11 @@ root.buttons(gears.table.join(
 
 -- {{{ Key bindings
 globalkeys = gears.table.join(
+    awful.key({}, "XF86AudioMute",      function() awful.util.spawn("amixer set Master toggle") end),
+    awful.key({}, "XF86AudioLowerVolume",      function() awful.util.spawn("amixer set Master 5%-") end),
+    awful.key({}, "XF86AudioRaiseVolume",      function() awful.util.spawn("amixer set Master 5%+") end),
+    awful.key({}, "XF86MonBrightnessDown",      function() awful.util.spawn("xbacklight -dec 10") end),
+    awful.key({}, "XF86MonBrightnessUp",      function() awful.util.spawn("xbacklight -inc 10") end),
     awful.key({ modkey,           }, "s",      hotkeys_popup.show_help,
               {description="show help", group="awesome"}),
     awful.key({ modkey,           }, "Left",   awful.tag.viewprev,

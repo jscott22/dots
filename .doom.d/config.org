@@ -4,25 +4,20 @@
 * UI
 ** Font
 #+begin_src emacs-lisp :tangle yes
-(setq doom-font (font-spec :family "UbuntuMono NF" :size 18))
+(setq doom-font (font-spec :family "UbuntuMono Nerd Font Mono" :size 18))
 (setq doom-theme 'doom-wal)
-(doom/reload-font)
+;;(doom/reload-font)
 #+end_src
 
 ** Fullscreen
 #+begin_src emacs-lisp :tangle yes
 ;; (add-to-list 'default-frame-alist '(fullscreen . maximized))
 #+end_src
-** Ewal
-#+begin_src emacs-lisp :tangle yes
-(def-package! ewal
-  :init (ewal-load-ewal-colors))
-#+end_src
 * LSP
 ** lsp-mode
 #+begin_src emacs-lisp :tangle yes
 (def-package! lsp-mode
-  :init (add-to-list 'exec-path "/home/blaeni/elixir-ls/release")
+  :init (add-to-list 'exec-path "/home/tyrell/elixir-ls/release")
   :hook
   (elixir-mode . lsp)
   :config
