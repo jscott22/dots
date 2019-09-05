@@ -241,8 +241,8 @@ awful.screen.connect_for_each_screen(function(s)
             sprtr,
             express_widget,
             sprtr,
-            -- brightness_widget,
-            -- sprtr,
+            brightness_widget,
+            sprtr,
             battery_widget,
             sprtr,
             -- mykeyboardlayout,
@@ -264,6 +264,7 @@ root.buttons(gears.table.join(
 
 -- {{{ Key bindings
 globalkeys = gears.table.join(
+    awful.key({}, "XF86AudioMicMute",      function() awful.util.spawn("amixer set Capture toggle") end),
     awful.key({}, "XF86AudioMute",      function() awful.util.spawn("amixer set Master toggle") end),
     awful.key({}, "XF86AudioLowerVolume",      function() awful.util.spawn("amixer set Master 5%-") end),
     awful.key({}, "XF86AudioRaiseVolume",      function() awful.util.spawn("amixer set Master 5%+") end),
